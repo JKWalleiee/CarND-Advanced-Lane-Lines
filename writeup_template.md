@@ -33,7 +33,7 @@ The code used to implement these functionality could be found in the central fun
 ### Undistort the images
 In this stage, the input image is undistorted using the camera calibration and distortion coefficients calculated in the calibration step.
 
-<img src="./test_images/test4.jpg" width="400"> <img src="./info_output/test4__und.jpg" width="400"> 
+<img src="./test_images/test4.jpg" width="400"> <img src="./info_output/test4__und_.jpg" width="400"> 
 
 ### Gaussian smoothing
 The code of this stage could be found in the central functions( gaussian_blur in [2] ), and the test section is in [7]. The goal in this stage is to decrease the noise in the image, inherent to the camera. In this step a small kernel size was used, because in the tests carried out it was observed that a large kernel erased important information from the lines in some frames of the test video.
@@ -102,7 +102,7 @@ Where right_fit_x and left_fit_x are the right and left polynomials respectively
 ### Final Output Image
 In draw_lane and put_info (in [2]) could be found the functions for the calculation and display of the lane lines on the original undistorted image. In this stage, a polygon is calculated based on the left and right polynomials, and this polygon is warped back to the original image, using the inverse transformation of the perspective transformation stage.
 
-<img src="./info_output/test4_lane_lines.jpg" width="1280"> 
+<img src="./info_output/test4_lane_lines_.jpg" width="1280"> 
 
 ## Pipeline (video)
 For the video pipeline test, the class LaneExtractor In [19] was used, which can be used for both, individual images and video frames. In this class, if the input is a video frame, some verifications are carried out (sanity check). If the curvature of the calculated line is between 0.1 and 10000, and the distance between the car and the center of the lane lines does not change more than 0.5 m between the current and previous frame, the lane line is considered valid. Otherwise, the lane line calculated in the previous frame is maintained, and the polynomial of the lane lines is recalculated.
