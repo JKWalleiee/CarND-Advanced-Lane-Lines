@@ -107,4 +107,4 @@ In draw_lane and put_info (in [2]) could be found the functions for the calculat
 ## Pipeline (video)
 For the video pipeline test, the class LaneExtractor In [19] was used, which can be used for both, individual images and video frames. In this class, if the input is a video frame, some verifications are carried out (sanity check). If the curvature of the calculated line is between 0.1 and 10000, and the distance between the car and the center of the lane lines does not change more than 0.5 m between the current and previous frame, the lane line is considered valid. Otherwise, the lane line calculated in the previous frame is maintained, and the polynomial of the lane lines is recalculated.
 
-The result of this pipeline can be found in [Output video](https://github.com/JKWalleiee/CarND-Advanced-Lane-Lines/test_videos_output/project_video.mp4)
+The result of this pipeline can be found in [link to my video result](./test_videos_output/project_video.mp4)
