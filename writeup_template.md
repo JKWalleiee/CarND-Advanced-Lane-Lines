@@ -25,7 +25,7 @@ The central functions used throughout the pipeline can be found in the second ce
 ## Camera Calibration
 The code of this stage is found in the central functions (camera_matrix and distortion_correction in [2]), and the test section is in the cells [5] and [6]. In this stage, the function cv2.findChessboardCorners of OpenCV is used to calculate the edges of the calibration images and save those corners in an array, imgpoints. The object points are stored in a second array called objpoints. The imgpoints and objpoints are used to compute the camera calibration and distortion coefficients using the cv2.calibrateCamera function. After this, cv2.undistort function is used to correct the distortion of the test images. An example of the result of this stage can be seen below:
 
-<img src="./info_output/calibration5_chessboard_und.jpg" width="1280"> 
+![Camera calibration](./info_output/calibration5_chessboard_und.jpg)
 
 ## Pipeline (single images)
 The code used to implement these functionality could be found in the central functions (in [7] to [18]). This pipeline is divided into 6 sub-stages.
@@ -46,7 +46,7 @@ In this stage 4 types of thresholds were used: 3 gradients thresholds and one co
 The gradient thresholds were: A sobel X gradient, and Magnitude gradient threshold and a Gradient direction threshold. These 3 thresholds receive as input the output of the Gaussian filter. The sobel X gradient (abs_sobel_thresh in [2]) was selected because the lane lines are mainly described with the gradient changes in the X direction. moreover, the magnitude (mag_thresh in [2]) and direction gradient (dir_threshold in [2]) were selected with the objective of extracting the gradient changes in the image where the gradient change has a magnitude that exceeded a defined threshold and has a direction similar to the direction expected for the lane lines.
 Next, each of these 3 separate thresholds and their combinations are shown.
 
-<img src="./info_output/test4__sobelX.jpg" width="1280"> 
+![Camera](./info_output/test4__sobelX.jpg)
 <img src="./info_output/test4__sobelM.jpg" width="1280"> 
 <img src="./info_output/test4__combinedM-Dir.jpg" width="1280"> 
 <img src="./info_output/test4__combinedSobel.jpg" width="1280"> 
