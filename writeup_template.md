@@ -38,7 +38,7 @@ In this stage, the input image is undistorted using the camera calibration and d
 ### Gaussian smoothing
 The code of this stage could be found in the central functions( gaussian_blur in [2] ), and the test section is in [7]. The goal in this stage is to decrease the noise in the image, inherent to the camera. In this step a small kernel size was used, because in the tests carried out it was observed that a large kernel erased important information from the lines in some frames of the test video.
 
-<img src="./info_output/test4__und_blur.jpg" width="1280" > 
+![Gaussian](./info_output/test4__und_blur.jpg)
 
 ### Thresholded binary image
 In this stage 4 types of thresholds were used: 3 gradients thresholds and one color threshold.
@@ -46,20 +46,20 @@ In this stage 4 types of thresholds were used: 3 gradients thresholds and one co
 The gradient thresholds were: A sobel X gradient, and Magnitude gradient threshold and a Gradient direction threshold. These 3 thresholds receive as input the output of the Gaussian filter. The sobel X gradient (abs_sobel_thresh in [2]) was selected because the lane lines are mainly described with the gradient changes in the X direction. moreover, the magnitude (mag_thresh in [2]) and direction gradient (dir_threshold in [2]) were selected with the objective of extracting the gradient changes in the image where the gradient change has a magnitude that exceeded a defined threshold and has a direction similar to the direction expected for the lane lines.
 Next, each of these 3 separate thresholds and their combinations are shown.
 
-![Camera](./info_output/test4__sobelX.jpg)
-<img src="./info_output/test4__sobelM.jpg" width="1280"> 
-<img src="./info_output/test4__combinedM-Dir.jpg" width="1280"> 
-<img src="./info_output/test4__combinedSobel.jpg" width="1280"> 
+![ThX](./info_output/test4__sobelX.jpg)
+![ThM](./info_output/test4__sobelM.jpg)
+<![ThCMD](./info_output/test4__combinedM-Dir.jpg)
+![ThCG](./info_output/test4__combinedSobel.jpg)
 
 For the color gradient, an HSL transformation of the undistorted input image was used, and its S channel was extracted, because this channel varies less in the presence of lighting changes in the environment. This channel was used together with a defined threshold to extract the white and yellow lines (hls_select in [2]).
 
-<img src="./info_output/test4_S_channel.jpg" width="1280"> 
-<img src="./info_output/test4_S_colorTH.jpg" width="1280"> 
+![s_ch](./info_output/test4_S_channel.jpg)
+![S_th](./info_output/test4_S_colorTH.jpg)
 
 The S channel color threshold usually has problems to detect some white lines, in comparison to the yellow lines, due to this, this threshold was combined with the previous combined gradient threshold. For the tests of this stage (in [8] - [13]) the following results were obtained:
 
-<img src="./info_output/test4_sobrel-colorTh.jpg" width="1280"> 
-<img src="./info_output/test4_coloredTh.jpg" width="1280"> 
+![S_rgb](./info_output/test4_coloredTh.jpg" width="1280"> 
+![ThS](./info_output/test4_sobrel-colorTh.jpg" width="1280"> 
 
 ### Perspective transformation
 The perspective transformation code could be found in [2] (bird_eye_transform), and the test code is in [14]. In this stage the first step is to calculate four points in the undistorted input image (source image) and configure a set of destination points for the transformation. This points were selected by trial and error, with the aim of having the parallel lane lines in the final image.
