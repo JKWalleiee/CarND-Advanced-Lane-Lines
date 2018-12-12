@@ -108,3 +108,25 @@ In draw_lane and put_info (in [2]) could be found the functions for the calculat
 For the video pipeline test, the class LaneExtractor In [19] was used, which can be used for both, individual images and video frames. In this class, if the input is a video frame, some verifications are carried out (sanity check). If the curvature of the calculated line is between 0.1 and 10000, and the distance between the car and the center of the lane lines does not change more than 0.5 m between the current and previous frame, the lane line is considered valid. Otherwise, the lane line calculated in the previous frame is maintained, and the polynomial of the lane lines is recalculated.
 
 The result of this pipeline can be found in [link to my video result](./test_videos_output/project_video.mp4)
+
+## Discussion
+### Potential shortcomings with the pipeline
+This pipeline has the following shortcomings:
+- It may not work when the location of the camera is different to the configured for the tests.
+- If there are strong lighting changes very often in the video.
+- If the lines of the floor disappear, as in a road crossing.
+- The efficiency of the pipeline can be very low in rainy and / or night conditions.
+- It may not work if there are objects (cars) obstructing for a long time the view of the camera towards the road.
+
+One of the main problems observed in the pipeline is the calculation of the points in the source image, selecteds for the perspective transformation. These points were calculated through trial and error, which negatively affects the transformation of perspective, and consequently, negatively influences the calculation of the curvature of the lane lines. An example of the effects of this problem can be seen in the great variation of the curvature obtained in the test video, so that the curvature of the lane lines could not be used in the sanity check.
+
+Another problem of this pipeline is the effects of the gradient change to sudden and consecutive lighting changes. This can be seen in the test video, when there are changes in lighting,  the polynomial calculated for the left lane line curves slightly towards the wall following the edge of the shadow.
+
+### Possible improvements in the pipeline
+A possible improvement would be to use a method for the calculation of a dynamic ROI, an example would be to use an algorithm for the search of the vanishing point of the road, and use this point to calculate the ROI. This dynamic ROI could be used for two important points in the calculation of the lane lines:
+- This ROI could be used as a basis for the calculation of the source image points used for the perspective transformation. However, a better method for choosing the source image points and the destination image points would still be necessary, with the aim of improving the efficiency of the perspective transformation.
+- This ROI could be used to limit the search area of lane lines, with the assurance that no information is being lost from the lane lines, nor is irrelevant information added to the search algorithm (objects on the road, walls, etc.)
+
+Another possible improvement would be to test the pipeline using only the color thresholds. It is observed that in the challenge video this could help to obtain an efficient calculation of the lane lines. However, this possible improvement was not implemented in the current pipeline due to two reasons:
+- This method can fail when there is little illumination and / or the color of the lane lines has been lost, due to wear on the ground, or it is not appreciable.
+- In this pipeline, one of my objectives was to use gradient thresholds along with color thresholds for the segmentation of the lane lines, to observe the results in a real test.
